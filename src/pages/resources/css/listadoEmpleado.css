@@ -1,0 +1,17 @@
+#drpdown-toggle {
+    margin-top: 0;
+}
+
+#btns {
+    float: right;
+    min-width: 30%;
+}
+
+#pagar {
+    float: left;
+    margin-top: 0;
+}
+
+#imprimir-nomina {
+    margin-left: 1%;
+}

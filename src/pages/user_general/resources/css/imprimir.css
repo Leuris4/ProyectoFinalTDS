@@ -1,0 +1,16 @@
+@media print {
+
+    .ocultar{
+          display: none;
+      }.page-break {
+      page-break-before:always;
+      width: auto;
+      margin: auto;
+     }
+     .container { 
+         margin-left: 0;
+     }
+   }
+   .derecha {
+       float: right;
+   }
