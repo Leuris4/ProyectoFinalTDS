@@ -20,6 +20,7 @@ class Login extends React.Component{
     islogged = () =>{
         let data =  document.cookie.split(";");
         if(data.length ===1){
+            this.setState({islogged: false});
         }else{
             let id =  data[0].split("=");
             if(id[1].length !== 0 ){
@@ -52,6 +53,8 @@ class Login extends React.Component{
                 .catch(error => console.log("error: " + error));
                 document.cookie = "_id="+data.employee_id+"; path=/";
                 document.cookie = "_rol="+data.rol+"; path=/";
+                console.log("Rol: " + data.rol);
+                console.log("ID: " + data.employee_id);
                 this.setState({islogged:true})
             }
 

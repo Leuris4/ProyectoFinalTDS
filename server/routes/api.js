@@ -6,7 +6,9 @@ const Bill = require('../models/bills');
 const Pass_type = require('../models/pass_type');
 const Pass = require('../models/pass');
 const Payroll = require('../models/payroll');
-// const { json } = require('stream/consumers');
+const TipoIngreso_Descuento = require('../models/tipoIngreso_Descuento');
+const Ingresos = require('../models/ingresos');
+const Descuentos = require('../models/descuentos');
 
 
 //Employee Section
@@ -45,7 +47,6 @@ router.get('/employee/id/:cedula',function(req,res,next){
        res.send(e);
     }).catch();
 });
-
 
 router.get('/employee/dt/:cedula',function(req,res,next){
     Employee.findOne({cedula: req.params.cedula, status: true }).then(function(e){
@@ -167,8 +168,147 @@ router.post('/payroll',function(req,res,next){
     }).catch(next);
 });
 
+router.put('/payroll/:id',function(req,res,next){
+    Payroll.findOneAndUpdate({employee_id: req.params.id},req.body).then(function(e){
+        Payroll.findOne({employee_id: req.params.id}).then(function(e){
+            res.send(e);
+        });
+    });
+});
+router.get('/payroll/:id',function(req,res,next){
+    Payroll.findOne({employee_id: req.params.id}).then(function(e){
+        res.send(e);
+    });
+});
+
+
 router.get('/payroll',function(req,res,next){
     Payroll.find({}).then(function(e){
         res.send(e);
     }).catch(next);
+});
+
+/**
+ * End payroll Section
+ * 
+ * 
+ * tipoIngreso_Descuento Section
+ **/
+
+router.post('/tipoIngreso_Descuentos',function(req,res,next){
+    TipoIngreso_Descuento.create(req.body).then(function(e){
+        res.send(e);
+    }).catch(next);
+});
+
+router.get('/tipoIngreso_Descuentos',function(req,res,next){
+    TipoIngreso_Descuento.find({}).then(function(e){
+        res.send(e);
+    }).catch(next);
+});
+
+router.put('/tipoIngreso_Descuento/:id',function(req,res,next){
+    TipoIngreso_Descuento.findOneAndUpdate({_id: req.params.id},req.body).then(function(e){
+        TipoIngreso_Descuento.findOne({_id: req.params.id}).then(function(e){
+            res.send(e);
+        });
+    });
+});
+
+router.get('/tipoIngreso_Descuentos/dt/:id',function(req,res,next){
+    TipoIngreso_Descuento.findOne({_id: req.params.id, status: true }).then(function(e){
+       if(e==null){
+           e= []
+       }
+       res.send(e);
+    }).catch();
+});
+
+/**
+ * End tipoIngreso_Descuento Section
+ * 
+ * 
+ * Ingresos Section
+ **/
+router.post('/Ingresos',function(req,res,next){
+    Ingresos.create(req.body).then(function(e){
+        res.send(e);
+    }).catch(next);
+});
+
+router.get('/Ingresos',function(req,res,next){
+
+    Ingresos.find({}).then(function(e){
+        res.send(e);
+    }).catch(next);
+});
+
+router.put('/Ingresos/:id',function(req,res,next){
+    Ingresos.findOneAndUpdate({_id: req.params.id},req.body).then(function(e){
+        Ingresos.findOne({_id: req.params.id}).then(function(e){
+            res.send(e);
+        });
+    });
+});
+
+router.get('/Ingresos/act/:id',function(req,res,next){
+    Ingresos.findOne({empleado_id: req.params.id, status: 1 }).then(function(e){
+       if(e==null){
+           e= []
+       }
+       res.send(e);
+    }).catch();
+});
+
+router.get('/Ingresos/actv/:id',function(req,res,next){
+    Ingresos.findOne({_id: req.params.id, status: 1 }).then(function(e){
+       if(e==null){
+           e= []
+       }
+       res.send(e);
+    }).catch();
+});
+
+/**
+ * End Ingresos Section
+ * 
+ * 
+ * Descuentos Section
+ */
+router.post('/Descuentos',function(req,res,next){
+    Descuentos.create(req.body).then(function(e){
+        res.send(e);
+    }).catch(next);
+});
+
+router.get('/Descuentos',function(req,res,next){
+
+    Descuentos.find({}).then(function(e){
+        res.send(e);
+    }).catch(next);
+});
+
+router.put('/Descuentos/:id',function(req,res,next){
+    Descuentos.findOneAndUpdate({_id: req.params.id},req.body).then(function(e){
+        Descuentos.findOne({_id: req.params.id}).then(function(e){
+            res.send(e);
+        });
+    });
+});
+
+router.get('/Descuentos/act/:id',function(req,res,next){
+    Descuentos.findOne({empleado_id: req.params.id, status: 1 }).then(function(e){
+       if(e==null){
+           e= []
+       }
+       res.send(e);
+    }).catch();
+});
+router.get('/Descuentos/actv/:id',function(req,res,next){
+    Descuentos.findOne({_id: req.params.id, status: 1 }).then(function(e){
+       if(e==null){
+           e= []
+       }
+       res.send(e);
+    }).catch();
 });

@@ -7,7 +7,7 @@ class listadoEmpleado extends React.Component{
     
     constructor(props){
         super(props);
-        this.state ={datos:[]}
+        this.state ={datos:[]};//, montoIngreso: 0, montoDescuento: 0}
         this.getData();
         this.desvincular = this.desvincular.bind(this);
         this.pagarNomina = this.pagarNomina.bind(this);
@@ -44,11 +44,28 @@ class listadoEmpleado extends React.Component{
             if(data.length !== 0){
                 let datos =[];
                 data.map((e)=>{
+                    
+                    // fetch('http://localhost:4000/api/Ingresos/act/' + e.employee_id)
+                    // .then(response => response.json())
+                    // .then(ingresos =>{
+                    //     ingresos.map(i => {
+                    //         this.setState({montoIngreso: parseFloat(this.state.montoIngreso) + i.monto});
+                    //     })
+                    // });
+                    // fetch('http://localhost:4000/api/Descuentos/act/' + e.employee_id)
+                    // .then(response => response.json())
+                    // .then(descuentos =>{
+                    //     descuentos.map(d => {
+                    //         this.setState({montoDescuento: parseFloat(this.state.montoDescuento) + d.monto});
+                    //     })
+                    // });
                     datos.push({
                         employee_id: e.employee_id,
                         date: new Date(),
                         payroll_id: e._id,
-                        total_amount:  e.salary_net,                 
+                        total_amount:  e.salary_net,
+                        // otrosIngresos: this.state.montoIngreso,
+                        // otrosDescuentos: this.state.montoDescuento,
                     });
                 })
                 fetch("http://localhost:4000/api/bill", {
@@ -136,7 +153,6 @@ class listadoEmpleado extends React.Component{
                     <tbody>
                        {this.state.datos.map((employee,index)=>
                         {
-                            console.log("Hola");
                             if(employee.status)
                                 return <tr key={index}>
                                 <td>{employee.cedula}</td>

@@ -18,6 +18,18 @@ const PayrollSchema = new Schema({
     },
     ars: {
         type: Number,
+    },
+    otrosIngresos: {
+        type: Number,
+        default: 0,
+    },
+    otrosDescuentos: {
+        type: Number,
+        default: 0,
+    },
+    status: {
+        type: Number,
+        default: 0,
     }
    
 });
